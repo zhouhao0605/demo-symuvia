@@ -1,0 +1,3 @@
+int SymRunEx( char* sFile );
+
+

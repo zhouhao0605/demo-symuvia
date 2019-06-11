@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT_SYMUBRUIT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="reseau.xsd" version="2.05">
+    <SIMULATIONS>
+        <SIMULATION id="simID" pasdetemps="0.1" debut="07:00:00" fin="07:05:00" loipoursuite="exacte" comportementflux="iti" date="2019-04-19" titre="Scoop_Scenario_90_10" proc_deceleration="true" seed="1">
+            <RESTITUTION trace_route="false" trajectoires="true" debug="false" debug_matrice_OD="false" debug_SAS="false" csv="true"/>
+        </SIMULATION>
+    </SIMULATIONS>
+    <TRAFICS>
+        <TRAFIC id="trafID" accbornee="true" coeffrelax="2.0" chgtvoie_ghost="false">
+            <TRONCONS>
+                <TRONCON id="Zone_A"/>
+                <TRONCON id="Zone_B"/>
+                <TRONCON id="Zone_C"/>
+                <TRONCON id="Zone_D" agressivite="true"/>
+                <TRONCON id="Zone_E"/>
+            </TRONCONS>
+            <TYPES_DE_VEHICULE>
+                <TYPE_DE_VEHICULE id="HDV" w="-6.25" kx="0.16" vx="20">
+                    <ACCELERATION_PLAGES>
+                        <ACCELERATION_PLAGE ax="1.5" vit_sup="5.8"/>
+                        <ACCELERATION_PLAGE ax="1" vit_sup="8"/>
+                        <ACCELERATION_PLAGE ax="0.5" vit_sup="infini"/>
+                    </ACCELERATION_PLAGES>
+                </TYPE_DE_VEHICULE>
+                <TYPE_DE_VEHICULE id="CHDV" w="-6.25" kx="0.16" vx="20">
+                    <ACCELERATION_PLAGES>
+                        <ACCELERATION_PLAGE ax="1.5" vit_sup="5.8"/>
+                        <ACCELERATION_PLAGE ax="1" vit_sup="8"/>
+                        <ACCELERATION_PLAGE ax="0.5" vit_sup="infini"/>
+                    </ACCELERATION_PLAGES>
+                </TYPE_DE_VEHICULE>
+            </TYPES_DE_VEHICULE>
+            <EXTREMITES>
+                <EXTREMITE id="Ext_In" typeCreationVehicule="demande">
+                    <FLUX_GLOBAL>
+                        <FLUX>
+                            <DEMANDES>
+                                <DEMANDE niveau="1.3" duree="200"/>
+                                <DEMANDE niveau="0" duree="100"/>
+                            </DEMANDES>
+                            <REP_DESTINATIONS>
+                                <REP_DESTINATION>
+                                    <DESTINATION coeffOD="1" sortie="Ext_Out"/>
+                                </REP_DESTINATION>
+                            </REP_DESTINATIONS>
+                        </FLUX>
+                        <REP_TYPEVEHICULES>
+                            <REP_TYPEVEHICULE coeffs="0.9 0.1" duree="200"/>
+                            <REP_TYPEVEHICULE coeffs="0.9 0.1" duree="100"/>
+                        </REP_TYPEVEHICULES>
+                    </FLUX_GLOBAL>
+                </EXTREMITE>
+                <EXTREMITE id="Ext_Out"/>
+            </EXTREMITES>
+            <CONNEXIONS_INTERNES>
+                <CONNEXION_INTERNE id="From_A_to_B"/>
+                <CONNEXION_INTERNE id="From_B_to_C"/>
+                <CONNEXION_INTERNE id="From_C_to_D"/>
+                <CONNEXION_INTERNE id="From_D_to_E"/>
+            </CONNEXIONS_INTERNES>
+        </TRAFIC>
+    </TRAFICS>
+    <RESEAUX>
+        <RESEAU id="resID">
+            <TRONCONS>
+                <TRONCON id="Zone_A" id_eltamont="Ext_In" id_eltaval="From_A_to_B" extremite_amont="-1000.0 150.0" extremite_aval="-900.0 150.0" largeur_voie="3" nb_voie="2" chgt_voie_droite="false"/>
+                <TRONCON id="Zone_B" id_eltamont="From_A_to_B" id_eltaval="From_B_to_C" extremite_amont="-900.0 150.0" extremite_aval="-400.0 150.0" largeur_voie="3" nb_voie="2" chgt_voie_droite="false"/>
+                <TRONCON id="Zone_C" id_eltamont="From_B_to_C" id_eltaval="From_C_to_D" extremite_amont="-400.0 150.0" extremite_aval="-150.0 150.0" largeur_voie="3" nb_voie="2" chgt_voie_droite="false"/>
+                <TRONCON id="Zone_D" id_eltamont="From_C_to_D" id_eltaval="From_D_to_E" extremite_amont="-150.0 150.0" extremite_aval="0.0 150.0" largeur_voie="3" nb_voie="2" chgtvoie_dstfin="5" chgtvoie_dstfin_force="-1e+20" chgt_voie_droite="false"/>
+                <TRONCON id="Zone_E" id_eltamont="From_D_to_E" id_eltaval="Ext_Out" extremite_amont="0.0 150.0" extremite_aval="100.0 150.0" largeur_voie="3"/>
+            </TRONCONS>
+            <CONNEXIONS>
+                <EXTREMITES>
+                    <EXTREMITE id="Ext_In"/>
+                    <EXTREMITE id="Ext_Out"/>
+                </EXTREMITES>
+                <REPARTITEURS>
+                    <REPARTITEUR id= "From_A_to_B">
+                        <MOUVEMENTS_AUTORISES>
+                            <MOUVEMENT_AUTORISE id_troncon_amont = "Zone_A" num_voie_amont="1">
+                                <MOUVEMENT_SORTIES>
+                                    <MOUVEMENT_SORTIE id_troncon_aval="Zone_B" num_voie_aval="1"/>
+                                </MOUVEMENT_SORTIES>
+                            </MOUVEMENT_AUTORISE>
+                            <MOUVEMENT_AUTORISE id_troncon_amont = "Zone_A" num_voie_amont="2">
+                                <MOUVEMENT_SORTIES>
+                                    <MOUVEMENT_SORTIE id_troncon_aval="Zone_B" num_voie_aval="2"/>
+                                </MOUVEMENT_SORTIES>
+                            </MOUVEMENT_AUTORISE>
+                        </MOUVEMENTS_AUTORISES>
+                    </REPARTITEUR>
+                    <REPARTITEUR id= "From_B_to_C">
+                        <MOUVEMENTS_AUTORISES>
+                            <MOUVEMENT_AUTORISE id_troncon_amont = "Zone_B" num_voie_amont="1">
+                                <MOUVEMENT_SORTIES>
+                                    <MOUVEMENT_SORTIE id_troncon_aval="Zone_C" num_voie_aval="1"/>
+                                </MOUVEMENT_SORTIES>
+                            </MOUVEMENT_AUTORISE>
+                            <MOUVEMENT_AUTORISE id_troncon_amont = "Zone_B" num_voie_amont="2">
+                                <MOUVEMENT_SORTIES>
+                                    <MOUVEMENT_SORTIE id_troncon_aval="Zone_C" num_voie_aval="2"/>
+                                </MOUVEMENT_SORTIES>
+                            </MOUVEMENT_AUTORISE>
+                        </MOUVEMENTS_AUTORISES>
+                    </REPARTITEUR>
+                    <REPARTITEUR id= "From_C_to_D">
+                        <MOUVEMENTS_AUTORISES>
+                            <MOUVEMENT_AUTORISE id_troncon_amont = "Zone_C" num_voie_amont="1">
+                                <MOUVEMENT_SORTIES>
+                                    <MOUVEMENT_SORTIE id_troncon_aval="Zone_D" num_voie_aval="1"/>
+                                </MOUVEMENT_SORTIES>
+                            </MOUVEMENT_AUTORISE>
+                            <MOUVEMENT_AUTORISE id_troncon_amont = "Zone_C" num_voie_amont="2">
+                                <MOUVEMENT_SORTIES>
+                                    <MOUVEMENT_SORTIE id_troncon_aval="Zone_D" num_voie_aval="2"/>
+                                </MOUVEMENT_SORTIES>
+                            </MOUVEMENT_AUTORISE>
+                        </MOUVEMENTS_AUTORISES>
+                    </REPARTITEUR>
+                    <REPARTITEUR id= "From_D_to_E">
+                        <MOUVEMENTS_AUTORISES>
+                            <MOUVEMENT_AUTORISE id_troncon_amont = "Zone_D" num_voie_amont="2">
+                                <MOUVEMENT_SORTIES>
+                                    <MOUVEMENT_SORTIE id_troncon_aval="Zone_E"/>
+                                </MOUVEMENT_SORTIES>
+                            </MOUVEMENT_AUTORISE>
+                        </MOUVEMENTS_AUTORISES>
+                    </REPARTITEUR>
+                </REPARTITEURS>
+                <GIRATOIRES/>
+                <CARREFOURSAFEUX/>
+            </CONNEXIONS>
+            <PARAMETRAGE_VEHICULES_GUIDES/>
+        </RESEAU>
+    </RESEAUX>
+    <SCENARIOS>
+        <SCENARIO id="defaultScenario" simulation_id="simID" trafic_id="trafID" reseau_id="resID" dirout="Sim_output_90_10" prefout="SymOutFile"/>
+    </SCENARIOS>
+</ROOT_SYMUBRUIT>
+

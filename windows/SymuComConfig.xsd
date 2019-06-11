@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified">
+    <xs:simpleType name="typeStrictPositiveDouble">
+        <xs:restriction base="xs:double">
+            <xs:minExclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="typeNonNegativeDouble">
+        <xs:restriction base="xs:double">
+            <xs:minInclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="typePercentDouble">
+        <xs:restriction base="xs:double">
+            <xs:minInclusive value="0.0"/>
+            <xs:maxInclusive value="1.0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="ROOT_SYMUCOM">
+        <xs:annotation>
+            <xs:documentation>Root of the SymuCom's configuration</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NOISE_SIMULATION">
+                    <xs:annotation>
+                        <xs:documentation>Settings for recreating noise for message distribution</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="graph_mean_dist" type="typeNonNegativeDouble"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Mean distance from all entity of the graph</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute default="0.1" name="alpha_latency" type="typePercentDouble"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Probability for the latency to be close to the mean value</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="graph_mean_latency" type="typeNonNegativeDouble"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Mean travel time for an empty message</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute default="0.005" name="alpha_noise" type="typePercentDouble"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Probability for a message to be modified (du to noise)</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute default="0.01" name="alpha_lost" type="typePercentDouble"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Probability for a message to be lost (du to noise)</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute default="0.002" name="alpha_down" type="typePercentDouble"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Probability for the entity to break down</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute default="0.9" name="beta_down" type="typePercentDouble"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Probability for the entity to be repaired</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="step_before_degression" type="xs:positiveInteger"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Probability for the entity to be repaired</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="RESTITUTION"/>
+            </xs:sequence>
+            <xs:attribute name="version" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation>Version number of the SymuCom's configuration model</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RESTITUTION">
+        <xs:annotation>
+            <xs:documentation>Specific settings for SymuCom's outputs</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute default="Out_SymuCom" name="directory_out" type="xs:string" use="optional">
+                <xs:annotation>
+                    <xs:documentation>Output directory for the results of the simulation</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute default="default" name="prefix_out" type="xs:string" use="optional">
+                <xs:annotation>
+                    <xs:documentation>Prefix for the output files</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
