@@ -44,4 +44,4 @@ If you get an error when doing `cdll.LoadLibrary('darwin/libSymuVia.dylib')`, tr
 1. Create a folder called `log` 
 2. Install developer tools as `xcode-select --install`
 3. In a terminal launch `python3 launcher.py`.
-4. Start and python console and restart the procedure. 
+4. Start a python console and restart the procedure. 
