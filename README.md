@@ -32,3 +32,7 @@ simulator.SymRunEx('bottleneck_001.xml'.encode('UTF8')) # run this file
 ## Running a simulation step by step 
 
 Please find more details on this within the Jupyter Notebook [Basics_API.ipynb](Basics_API.ipynb)
+
+## Note about `launcher.py` and `spydsla.py`
+
+These files are dedicated to reconfigure the dependencies for shared libraries inside `darwin`. They are useful to import the library within python in MacOS, not in windows. 
