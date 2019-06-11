@@ -36,3 +36,12 @@ Please find more details on this within the Jupyter Notebook [Basics_API.ipynb](
 ## Note about `launcher.py` and `spydsla.py`
 
 These files are dedicated to reconfigure the dependencies for shared libraries inside `darwin`. They are useful to import the library within python in MacOS, not in windows. 
+
+Only in MacOSX 
+
+If you get an error when doing `cdll.LoadLibrary('darwin/libSymuVia.dylib')`, try: 
+
+1. Create a folder called `log` 
+2. Install developer tools as `xcode-select --install`
+3. In a terminal launch `python3 launcher.py`.
+4. Start and python console and restart the procedure. 
