@@ -1,6 +1,11 @@
 # Demo on SymuVia API 
 
-This demo is an example on how to access the `SymuVia` API from the basics. The structure contains two folders: `darwin`  for MacOS and `windows` for windows platforms. 
+This demo is an example on how to access the `SymuVia` API from the basics. The structure contains two folders: `darwin`  for MacOS and `windows` for windows platforms.
+
+The demo file [simulation_test.py](simulation_test.py) is a file containing necessary instructions to launch the script in a MacOS platform. In order to modify to windows just 
+change the value `darwin` by `windows` and the value `libSymuVia.dylib` by `SymuVia.dll`
+
+**Note**: Use absolute paths when importing the shared library.
 
 ## Loading `SymuVia` in Python
 
@@ -10,24 +15,29 @@ In MacOS
 
 ```python
 from ctypes import cdll 
-simulator = cdll.LoadLibrary('darwin/libSymuVia.dylib')  # load simulator
+simulator = cdll.LoadLibrary('your_mac_dir/demo-symuvia/darwin/libSymuVia.dylib')  # load simulator
 ```
+
+Replace `your_mac_dir` for the absolute path to the directory where `demo-symuvia` is placed 
 
 In Windows 
 
 ```python
 from ctypes import cdll 
-simulator = cdll.LoadLibrary('windows\SymuVia.dll')  # load simulator
+simulator = cdll.LoadLibrary('your_windows_dir\windows\SymuVia.dll')  # load simulator
 ```
-
+Replace `your_windows_dir` for the absolute path to the directory where `demo-symuvia` is placed  
 
 ## Running a simulation in a single step 
 
 To launch the simulation, load the XML file into the simulator via `SymLoadNetworkEx`, then play the simulation via `SymRunEx`:
 
 ```python
-simulator.SymLoadNetworkEx('bottleneck_001.xml'.encode('UTF8')) # load simulation into simulator 
-simulator.SymRunEx('bottleneck_001.xml'.encode('UTF8')) # run this file 
+import os 
+xml_file = os.path.join(os.getcwd(),'bottleneck_001.xml') # Absolute path of xml file 
+print(xml_file)
+simulator.SymLoadNetworkEx(xml_file.encode('UTF8')) # load simulation into simulator 
+simulator.SymRunEx(xml_file.encode('UTF8')) # run this file 
 ```
 ## Running a simulation step by step 
 
