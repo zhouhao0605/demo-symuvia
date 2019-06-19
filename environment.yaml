@@ -3,8 +3,10 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - black
   - numpy 
   - networkx
   - python=3.7
+  - pylint
   - xmltodict
   - jupyterlab
