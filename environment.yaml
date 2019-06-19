@@ -1,0 +1,10 @@
+name: demo-symuvia
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - numpy 
+  - networkx
+  - python=3.7
+  - xmltodict
+  - voila
