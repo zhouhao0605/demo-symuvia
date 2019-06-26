@@ -3,4 +3,6 @@ numpy
 networkx
 xmltodict
 pylint
-jupyteralb
+pytest
+jupyterlab
+ipykernel

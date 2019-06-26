@@ -10,3 +10,4 @@ dependencies:
   - pylint
   - xmltodict
   - jupyterlab
+  - ipykernel
