@@ -31,6 +31,8 @@ simulator = cdll.LoadLibrary(r"D:\Projects\demo_symuvia\windows\SymuVia.dll")  #
 
 print('load input network')
 xml_file = os.path.join(r"D:\Projects\demo_symuvia\bottleneck_001.xml") # Absolute path of xml file # 66, a test xml input file
+#66, for windows, it's better to use r"..." to give the raw string
+
 print('the input xml file is', xml_file)
 simulator.SymLoadNetworkEx(xml_file.encode('UTF8')) # load simulation into simulator
 simulator.SymRunEx(xml_file.encode('UTF8')) #66 run this file
